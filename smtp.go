@@ -17,14 +17,8 @@ func SmtpSend(m *Mail, a *Auth) (err error) {
 	e.Cc = m.Cc
 	e.Bcc = m.Bcc
 	e.Subject = m.Subject
-
-	// Text 与 Html 二选一，都存在只发送Html
-	if m.Text != "" {
-		e.Text = []byte(m.Text)
-	}
-	if m.Html != "" {
-		e.HTML = []byte(m.Html)
-	}
+	e.Text = []byte(m.Text)
+	e.HTML = []byte(m.Html) // Text 与 Html 二选一，都存在只发送Html
 
 	if m.Attach != nil && len(m.Attach) > 0 {
 		for _, attach := range m.Attach {

@@ -1,5 +1,7 @@
 package hmail
 
+import "time"
+
 type Mail struct {
 	From    string    // 发件名称，可为空
 	To      []string  // 收件邮箱，必填
@@ -9,6 +11,7 @@ type Mail struct {
 	Text    string    // 邮件文本内容 Text 与 Html 二选一
 	Html    string    // 邮件HTML内容
 	Attach  []*Attach // 邮件附件
+	Date    time.Time // 邮件时间
 }
 
 type Attach struct {

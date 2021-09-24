@@ -5,7 +5,7 @@
 使用方法
 
 ```
-mail,err = hmail.ImapFetch(auth)
+mail,err = hmail.ImapFetchSince(auth,time)  // 收指定时间内的邮件
 ```
 
 ## 使用SMTP发送邮件
