@@ -37,7 +37,7 @@ func ImapFetchSince(auth *Auth, timeSince time.Time, timeBefore time.Time) (list
 	}
 	ids, err := c.Search(criteria)
 	if err != nil {
-		log.Fatal("Search:", err)
+		log.Panic("Search:", err)
 	}
 	log.Println("IDs found:", ids)
 	seqSet := new(imap.SeqSet)
@@ -48,7 +48,7 @@ func ImapFetchSince(auth *Auth, timeSince time.Time, timeBefore time.Time) (list
 	messages := make(chan *imap.Message, len(ids))
 	go func() {
 		if err = c.Fetch(seqSet, []imap.FetchItem{section.FetchItem()}, messages); err != nil {
-			log.Fatal(err)
+			log.Panic(err)
 		}
 	}()
 

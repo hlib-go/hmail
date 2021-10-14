@@ -43,7 +43,7 @@ func ImapFetchLatest(auth *Auth, num uint32) (list []*Mail, err error) {
 	messages := make(chan *imap.Message, num)
 	go func() {
 		if err = c.Fetch(seqSet, items, messages); err != nil {
-			log.Fatal(err)
+			log.Panic(err)
 		}
 	}()
 
