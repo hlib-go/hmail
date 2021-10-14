@@ -13,7 +13,7 @@ func TestImapFetchSince(t *testing.T) {
 		Addr:     imapAddr,
 		Username: username,
 		Password: password,
-	}, time.Now().Local().AddDate(0, 0, -1))
+	}, time.Now().Local().AddDate(0, 0, -2), time.Now().Local().AddDate(0, 0, -1))
 	if err != nil {
 		t.Error(err)
 		return

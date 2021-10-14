@@ -8,7 +8,7 @@ import (
 )
 
 // ImapFetchSince 收取指定时间之后的邮件
-func ImapFetchSince(auth *Auth, timeSince time.Time) (list []*Mail, err error) {
+func ImapFetchSince(auth *Auth, timeSince time.Time, timeBefore time.Time) (list []*Mail, err error) {
 
 	c, err := ImapClient(auth)
 	if err != nil {
@@ -29,7 +29,12 @@ func ImapFetchSince(auth *Auth, timeSince time.Time) (list []*Mail, err error) {
 
 	// 查询指定时间之后的邮件
 	criteria := imap.NewSearchCriteria()
-	criteria.Since = timeSince
+	if !timeSince.IsZero() {
+		criteria.Since = timeSince
+	}
+	if !timeBefore.IsZero() {
+		criteria.Before = timeBefore
+	}
 	ids, err := c.Search(criteria)
 	if err != nil {
 		log.Fatal("Search:", err)
